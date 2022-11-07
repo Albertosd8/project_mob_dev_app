@@ -43,6 +43,7 @@ dependencies:
   google_sign_in: ^5.4.2
   firebase_core: ^2.1.1
   firebase_storage: ^11.0.4
+  flutter_shimmer: ^2.1.2
 
 dev_dependencies:
   flutter_test:

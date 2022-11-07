@@ -276,7 +276,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       onPressed: (){
-                        // Navigator.of(context).pushNamed("/sign_in");
+                        // Navigator.of(context).pushNamed("/principal_menu"); //change later
                       }, 
                     ),
                     SizedBox(
@@ -299,7 +299,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             onPressed: () {
-                              // To website
+                              Navigator.of(context).pushNamed("/principal_menu"); //change later
                             },
                             child: const Text("Become a partner"),
                           ),

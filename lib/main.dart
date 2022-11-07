@@ -4,6 +4,8 @@ import 'package:project_app_eateso/home/home_page.dart';
 import 'package:project_app_eateso/home/home_options.dart';
 import 'package:project_app_eateso/pages/sign-in/sign_in.dart';
 import 'package:project_app_eateso/pages/sign-up/sign_up.dart';
+import 'package:project_app_eateso/pages/principal_menu/principal_menu_page.dart';
+import 'package:project_app_eateso/pages/principal_menu/principal_menu_bloc/principal_menu_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'auth/bloc/auth_bloc.dart';
 import 'firebase_options.dart';
@@ -22,9 +24,9 @@ void main() async {
     BlocProvider(
       create: (context) => AuthBloc()..add(VerifyAuthEvent()),
     ),
-    /*BlocProvider(
-      create: (context) => JoinBloc(),
-    )*/
+    BlocProvider(
+      create: (context) => EstablishmentsBloc(),
+    )
   ], child: MyApp()));
 }
 
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
           "/homePageOptions": (context) => HomePageOptions(),
           "/sign_in": (context) => SignIn(),
           "/sign_up": (context) => SignUp(),
+          "/principal_menu": (context) => principalMenu(),
         });
   }
 }
