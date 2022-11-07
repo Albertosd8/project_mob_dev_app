@@ -9,15 +9,15 @@ import 'auth/bloc/auth_bloc.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      /*options: const FirebaseOptions(
-    apiKey: "AIzaSyCoRtMFbjeQrNbG8m1Egx36Y7NjAT22dac",
-    appId: "project-mob-49634",
-    messagingSenderId: ""
-    projectId: "961243009208"
-  )*/
-      );
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //     /*options: const FirebaseOptions(
+  //   apiKey: "AIzaSyCoRtMFbjeQrNbG8m1Egx36Y7NjAT22dac",
+  //   appId: "project-mob-49634",
+  //   messagingSenderId: ""
+  //   projectId: "961243009208"
+  // )*/
+  //     );
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
       create: (context) => AuthBloc()..add(VerifyAuthEvent()),
