@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:project_app_eateso/pages/sign_up.dart';
 
 class SignIn extends StatefulWidget {
   SignIn({Key? key}) : super(key: key);
@@ -207,7 +208,7 @@ class _SignInState extends State<SignIn> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushNamed("/sign_up");
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp(),));
                         },
                         child: const Text("Sign up"),
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:project_app_eateso/home/home_options.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 onPressed: (){
-                  Navigator.of(context).pushNamed("/homePageOptions");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePageOptions(),));
                 }, 
               ),
               SizedBox(

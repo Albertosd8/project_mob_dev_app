@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:project_app_eateso/pages/sign_in.dart';
+import 'package:project_app_eateso/pages/sign_up.dart';
 
 import '../auth/bloc/auth_bloc.dart';
 
@@ -115,7 +117,7 @@ class _HomePageOptionsState extends State<HomePageOptions> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamed("/sign_up");
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp(),));
                   },
                 ),
                 SizedBox(
@@ -130,7 +132,7 @@ class _HomePageOptionsState extends State<HomePageOptions> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamed("/sign_in");
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn(),));
                   },
                   child: const Text('Already have an account?'),
                 ),

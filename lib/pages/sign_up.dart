@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:project_app_eateso/pages/principal_menu.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
@@ -12,14 +13,6 @@ class _SignUpState extends State<SignUp> {
   var _textController = TextEditingController();
   var _textControllerEmail = TextEditingController();
   bool light = true;
-  // String dropdownvalue = 'MX';  
-  //  var items = [   
-  //   'MX',
-  //   'Item 2',
-  //   'Item 3',
-  //   'Item 4',
-  //   'Item 5',
-  // ];
 
   @override
   Widget build(BuildContext context){
@@ -55,68 +48,6 @@ class _SignUpState extends State<SignUp> {
                         )
                       ),
                     ),
-                    // SizedBox(
-                    //   height: 10,
-                    // ),
-                    // Container(
-                    //   width: MediaQuery.of(context).size.width * 0.70,
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: [
-                    //       SizedBox(width: 1,),
-                    //       DropdownButton(
-                    //         borderRadius: BorderRadius.all(Radius.circular(10)),
-                    //         dropdownColor: Colors.white,
-                    //         // Initial Value
-                    //         value: dropdownvalue,
-                    //         // Down Arrow Icon
-                    //         icon: const Icon(Icons.keyboard_arrow_down), 
-                    //         // Array list of items
-                    //         items: items.map((String items) {
-                    //           return DropdownMenuItem(
-                    //             value: items,
-                    //             child: Text(items),
-                    //           );
-                    //         }).toList(),
-                    //         // After selecting the desired option,it will
-                    //         // change button value to selected value
-                    //         onChanged: (String? newValue) {
-                    //           setState(() {
-                    //             dropdownvalue = newValue!;
-                    //           });
-                    //         },
-                    //       ),
-                    //       SizedBox(
-                    //         width: MediaQuery.of(context).size.width * 0.40,
-                    //         child: TextField(
-                    //           controller: _textController,
-                    //           keyboardType: TextInputType.number,
-                    //           decoration: InputDecoration(
-                    //             filled: true,  
-                    //             fillColor: Colors.white70,
-                    //             enabledBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(20.0),
-                    //               borderSide: BorderSide(color: Colors.white)
-                    //             ),
-                    //             focusedBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(20.0),
-                    //               borderSide: BorderSide(color: Colors.white)
-                    //             ),
-                    //             focusedErrorBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(20.0),
-                    //               borderSide: BorderSide(color: Colors.red)
-                    //             ),
-                    //             labelText: '222 443 232',
-                    //             labelStyle: TextStyle(
-                    //               color: Colors.black45,
-                    //               fontWeight: FontWeight.bold
-                    //               )
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     SizedBox(
                       height: 10,
                     ),
@@ -277,6 +208,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       onPressed: (){
                         // Navigator.of(context).pushNamed("/principal_menu"); //change later
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => principalMenu(),));
                       }, 
                     ),
                     SizedBox(
@@ -299,7 +231,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushNamed("/principal_menu"); //change later
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => principalMenu(),)); //change later
                             },
                             child: const Text("Become a partner"),
                           ),
