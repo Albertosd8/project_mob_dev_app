@@ -8,7 +8,7 @@ class PaymentService {
   final String url;
 
   PaymentService({
-    this.amount = 10,
+    this.amount = 10000,
     this.url =
         'https://us-central1-project-mob-49634.cloudfunctions.net/StripePI',
   });

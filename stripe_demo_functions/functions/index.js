@@ -2,7 +2,7 @@ const functions = require("firebase-functions");
 const stripe = require('stripe')(functions.config().stripe.testkey)
 
 exports.StripePI = functions.https.onRequest(async (req,res) => {
-    const stripeVendorAccount = 'acct_1M8ylHESlXamnSUl'
+    const stripeVendorAccount = 'acct_1MA3xsKPCXBxXlvT'
 
     const fee = (req.query.amount/100) | 0;
 
