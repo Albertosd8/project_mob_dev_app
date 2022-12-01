@@ -302,6 +302,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "stripe_payment",
+      "rootUri": "file:///C:/Flutter/.pub-cache/hosted/pub.dartlang.org/stripe_payment-1.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "term_glyph",
       "rootUri": "file:///C:/Flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.1",
       "packageUri": "lib/",
@@ -332,7 +338,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-12-01T18:55:44.650452Z",
+  "generated": "2022-12-01T19:26:06.316094Z",
   "generator": "pub",
-  "generatorVersion": "2.18.4"
+  "generatorVersion": "2.18.5"
 }
