@@ -51,8 +51,7 @@ class _principalMenuState extends State<principalMenu> {
             if(i == 0){
               BlocProvider.of<DataRestaurantBloc>(context).add(LoadRestaurantData());
             }else if(i == 1){
-              print("hey");
-              // BlocProvider.of<SearchDataBloc>(context).add(LoadSearchRestaurantResults(search_text:'CurrentSessionButNoSearch'));
+              BlocProvider.of<SearchDataBloc>(context).add(LoadSearchRestaurantResults(search_text: ''));
             }
             index = i;
           });

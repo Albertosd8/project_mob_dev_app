@@ -16,19 +16,22 @@ class SearchDataBloc extends Bloc<SearchEvent, SearchState> {
         QuerySnapshot list_v = await restaurants_collection.get();
         List<dynamic> result = list_v.docs.map((e) => e.data()).toList();
         List<dynamic> Searchresults = [];
-        for(int i = 0;i < result.length; i++){
-          if(event.search_text.length == 0){
-            Searchresults = [];
-          }else{
-            if(result[i]['restaurant_name'].contains(event.search_text)){
-            Searchresults.add(result[i]);
+        if(event.search_text == null || event.search_text == ''){
+          emit(NoDataYet());
+        }else{
+          for(int i = 0; i < result.length; i++){ 
+            if(result[i]['restaurant_name'] != null)
+            { //it doesn't consider establishments names with accents 
+              if((result[i]['restaurant_name'].toLowerCase()).contains(event.search_text.toLowerCase())){
+                Searchresults.add(result[i]);
+              }
             }
           }
-        }
-        if(Searchresults.isEmpty){
-          emit(NoRestaurantSearchRestaurantsResults());
-        }else{
-          emit(LoadedSearchRestaurantsResults(restaurant_data: Searchresults)); 
+          if(Searchresults.length == 0){
+            emit(NoRestaurantSearchRestaurantsResults());
+          }else{
+            emit(LoadedSearchRestaurantsResults(restaurant_data: Searchresults)); 
+          }
         }
       }catch( error ) {
         emit(ErrorLoadingSearchRestaurantsResults());

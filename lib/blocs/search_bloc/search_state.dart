@@ -16,5 +16,7 @@ class ErrorLoadingSearchRestaurantsResults extends SearchState {}
 
 class NoRestaurantSearchRestaurantsResults extends SearchState {}
 
+class NoDataYet extends SearchState{}
+
 class DuplicateRestaurant extends SearchState {}
 

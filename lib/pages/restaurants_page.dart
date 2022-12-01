@@ -29,12 +29,19 @@ class _RestaurantPageState extends State<RestaurantPage>{
               itemCount: state.restaurant_data.length,
               separatorBuilder: (BuildContext context, int index) => SizedBox(height: 6,),
               itemBuilder: (BuildContext context, int index){
-                return RestaurantWidget(
-                  image: state.restaurant_data[index]['restaurant_image']!, //consider null case
-                  establishment_name: state.restaurant_data[index]['restaurant_name']!, 
-                  products: state.restaurant_data[index]['products'],
-                  open: state.restaurant_data[index]['open_schedule'],
-                  close: state.restaurant_data[index]['close_schedule'],
+                return RestaurantWidget( //changes already made to consider null cases
+                  image: (state.restaurant_data[index]['restaurant_image'] == null)?  'https://img.freepik.com/free-photo/gray-texture_1253-103.jpg?w=2000': state.restaurant_data[index]['restaurant_image']!,
+                  establishment_name: (state.restaurant_data[index]['restaurant_name']) == null ? 'Restaurante ejemplo' : state.restaurant_data[index]['restaurant_name']!, 
+                  products: (state.restaurant_data[index]['products']) == null ? [{
+                  'image': 'https://guich.mx/img/menu/P20196021D.png', 
+                  'name': '1/2 Panini #1 Vegetarian',
+                  'price': 19.22, 
+                  'description': '1/2 Panini #1 Vegetarian', 
+                  'extra': [], 
+                  'available' : true
+                  }]: state.restaurant_data[index]['products'],
+                  open: (state.restaurant_data[index]['open_schedule']) == null ?  '9:00' : state.restaurant_data[index]['open_schedule'] ,
+                  close: (state.restaurant_data[index]['close_schedule']) == null ?  '18:00' : state.restaurant_data[index]['close_schedule'],
                 );
             },
           );
