@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_app_eateso/blocs/filter_bloc/filter_bloc.dart';
 import 'package:project_app_eateso/blocs/search_bloc/search_bloc.dart';
+import 'package:project_app_eateso/blocs/user_account_bloc/user_account_bloc.dart';
 import 'package:project_app_eateso/home/home_page.dart';
 import 'package:project_app_eateso/home/home_options.dart';
 import 'package:project_app_eateso/pages/sign_in.dart';
@@ -20,10 +22,16 @@ void main() async {
       create: (context) => AuthBloc()..add(VerifyAuthEvent()),
     ),
     BlocProvider(
-      create: (context) => DataRestaurantBloc(), //check how to do this without having to do it at first
+      create: (context) => DataRestaurantBloc(), 
     ),
     BlocProvider(
-      create: (context) => SearchDataBloc(), //check how to do this without having to do it at first
+      create: (context) => SearchDataBloc(), 
+    ),
+    BlocProvider(
+      create: (context) => UserAccountEditBloc(),
+    ),
+    BlocProvider(
+      create: (context) => FilterSearchDataBloc()
     ),
   ], child: MyApp()));
 }

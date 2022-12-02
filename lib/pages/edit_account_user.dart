@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:project_app_eateso/blocs/user_account_bloc/user_account_bloc.dart';
 import 'package:project_app_eateso/pages/sign_up.dart';
 
 class EditUserAccountPage extends StatefulWidget {
@@ -10,7 +11,8 @@ class EditUserAccountPage extends StatefulWidget {
 }
 
 class _EditUserAccountPageState extends State<EditUserAccountPage> {
-  var _textController = TextEditingController();
+  var _textControllerUser = TextEditingController();
+  var _textControllerImage = TextEditingController();
   bool light = true;
 
   @override
@@ -56,16 +58,19 @@ class _EditUserAccountPageState extends State<EditUserAccountPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          "Good to see you back!", 
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20
-                          )
-                        ),
+                        LimitedBox(
+                            maxWidth: MediaQuery.of(context).size.width * 0.70,
+                            child: Text(
+                            'Press confirm changes for save changes',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold
+                              ),
+                            ) 
+                          ),
                         SizedBox(
-                          height: 30,
+                          height: 15,
                         ),
                       ],
                     ),
@@ -78,7 +83,7 @@ class _EditUserAccountPageState extends State<EditUserAccountPage> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.70,
                   child: TextField(
-                    controller: _textController,
+                    controller: _textControllerUser,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       filled: true,  
@@ -109,7 +114,7 @@ class _EditUserAccountPageState extends State<EditUserAccountPage> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.70,
                   child: TextField(
-                    controller: _textController,
+                    controller: _textControllerImage,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       filled: true,  
@@ -126,7 +131,7 @@ class _EditUserAccountPageState extends State<EditUserAccountPage> {
                         borderRadius: BorderRadius.circular(20.0),
                         borderSide: BorderSide(color: Colors.red)
                       ),
-                      labelText: 'Password',
+                      labelText: 'Profile pic image url',
                       labelStyle: TextStyle(
                         color: Colors.black45,
                         fontWeight: FontWeight.bold
@@ -139,23 +144,28 @@ class _EditUserAccountPageState extends State<EditUserAccountPage> {
                 ),
                 ElevatedButton(
                   child: Text(
-                    "Sign in",
+                    "Confirm changes",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black
+                      color: Colors.white
                     )
                   ),
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(MediaQuery.of(context).size.width * 0.70, MediaQuery.of(context).size.height * 0.05),
-                    backgroundColor: Color.fromARGB(255, 250, 223, 124),
-                    foregroundColor: Colors.black,
+                    backgroundColor: Color.fromARGB(255, 134, 156, 68),
+                    foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15), // <-- Radius
                     ),
                   ),
                   onPressed: (){
-                    // Navigator.of(context).pushNamed("/sign_in");
+                    BlocProvider.of<UserAccountEditBloc>(context).add(UpdateUserAccount(newUserData: {
+                      'user_id' : 'user_test',
+                      'username' : _textControllerUser.text,
+                      'profile_image': _textControllerImage.text
+                    }));
+                    Navigator.pop(context); //insert alert dialog of success before pop
                   }, 
                 ),
                 SizedBox(

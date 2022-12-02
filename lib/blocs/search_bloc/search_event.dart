@@ -7,3 +7,4 @@ class LoadSearchRestaurantResults extends SearchEvent {
 
   LoadSearchRestaurantResults({required this.search_text});
 }
+

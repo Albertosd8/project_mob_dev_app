@@ -17,7 +17,7 @@ class _SearchPageState extends State<SearchPage>{
   Widget build(BuildContext context){
   return 
   Container(
-    child: Column( //filter comida-cafe-u-otro y precio en productos
+    child: Column( 
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -96,11 +96,11 @@ class _SearchPageState extends State<SearchPage>{
                 } else if (state is NoDataYet) {
                   return Container();
                 }  
-                return Text('hey');
+                return Container();
               },
             ),
           ),
-        )
+        ),
       ]
     ),
 
