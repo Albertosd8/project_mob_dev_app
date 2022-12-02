@@ -1,15 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:project_app_eateso/blocs/user_account_bloc/user_account_bloc.dart';
+import 'package:project_app_eateso/pages/sign_up.dart';
 
-class SignIn extends StatefulWidget {
-  SignIn({Key? key}) : super(key: key);
+class EditUserAccountPage extends StatefulWidget {
+  EditUserAccountPage({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState()=> _SignInState();
+  State<EditUserAccountPage> createState()=> _EditUserAccountPageState();
 }
 
-class _SignInState extends State<SignIn> {
-  var _textController = TextEditingController();
+class _EditUserAccountPageState extends State<EditUserAccountPage> {
+  var _textControllerUser = TextEditingController();
+  var _textControllerImage = TextEditingController();
   bool light = true;
 
   @override
@@ -45,7 +48,7 @@ class _SignInState extends State<SignIn> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Let's get something", 
+                          "User Account", 
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -55,16 +58,19 @@ class _SignInState extends State<SignIn> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          "Good to see you back!", 
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20
-                          )
-                        ),
+                        LimitedBox(
+                            maxWidth: MediaQuery.of(context).size.width * 0.70,
+                            child: Text(
+                            'Press confirm changes for save changes',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold
+                              ),
+                            ) 
+                          ),
                         SizedBox(
-                          height: 30,
+                          height: 15,
                         ),
                       ],
                     ),
@@ -77,7 +83,7 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.70,
                   child: TextField(
-                    controller: _textController,
+                    controller: _textControllerUser,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       filled: true,  
@@ -108,7 +114,7 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.70,
                   child: TextField(
-                    controller: _textController,
+                    controller: _textControllerImage,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       filled: true,  
@@ -125,7 +131,7 @@ class _SignInState extends State<SignIn> {
                         borderRadius: BorderRadius.circular(20.0),
                         borderSide: BorderSide(color: Colors.red)
                       ),
-                      labelText: 'Password',
+                      labelText: 'Profile pic image url',
                       labelStyle: TextStyle(
                         color: Colors.black45,
                         fontWeight: FontWeight.bold
@@ -136,39 +142,38 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: 10,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.70,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Remind me next time",
-                        style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                        )
-                      ),
-                      Switch(
-                        // overlayColor: MaterialStateProperty.all<Color>(Colors.black),
-                        trackColor: MaterialStateProperty.all<Color>(Colors.green),
-                        thumbColor: MaterialStateProperty.all<Color>(Colors.white),
-                        value:light,
-                        onChanged: (bool value) {
-                          setState(() {
-                            light = value;
-                          });
-                        }
-                      ),
-                    ],
+                ElevatedButton(
+                  child: Text(
+                    "Confirm changes",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white
+                    )
                   ),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(MediaQuery.of(context).size.width * 0.70, MediaQuery.of(context).size.height * 0.05),
+                    backgroundColor: Color.fromARGB(255, 134, 156, 68),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15), // <-- Radius
+                    ),
+                  ),
+                  onPressed: (){
+                    BlocProvider.of<UserAccountEditBloc>(context).add(UpdateUserAccount(newUserData: {
+                      'user_id' : 'user_test',
+                      'username' : _textControllerUser.text,
+                      'profile_image': _textControllerImage.text
+                    }));
+                    Navigator.pop(context); //insert alert dialog of success before pop
+                  }, 
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 ElevatedButton(
                   child: Text(
-                    "Sign in",
+                    "Go back",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -177,44 +182,17 @@ class _SignInState extends State<SignIn> {
                   ),
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(MediaQuery.of(context).size.width * 0.70, MediaQuery.of(context).size.height * 0.05),
-                    backgroundColor: Color.fromARGB(255, 250, 223, 124),
-                    foregroundColor: Colors.black,
+                    backgroundColor: Color.fromARGB(255, 236, 236, 236),
+                    foregroundColor: Colors.black54,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15), // <-- Radius
                     ),
                   ),
                   onPressed: (){
+                    Navigator.pop(context);
                     // Navigator.of(context).pushNamed("/sign_in");
                   }, 
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.70,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Don't have an account?"
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.orange,
-                          textStyle: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed("/sign_up");
-                        },
-                        child: const Text("Sign up"),
-                      ),
-                    ],
-                  ),
-                ),
-                
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 5,
                 ),
