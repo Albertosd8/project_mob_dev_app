@@ -44,6 +44,8 @@ dependencies:
   firebase_core: ^2.1.1
   firebase_storage: ^11.0.4
   flutter_shimmer: ^2.1.2
+  stripe_payment: ^1.1.4
+  http: ^0.13.1
 
 dev_dependencies:
   flutter_test:
