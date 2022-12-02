@@ -6,6 +6,8 @@ import 'package:project_app_eateso/widgets/restaurants.dart';
 import 'package:project_app_eateso/blocs/restaurant_bloc/restaurant_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../auth/bloc/auth_bloc.dart';
+
 class UserAccountPage extends StatefulWidget {
   UserAccountPage({Key? key}) : super(key: key);
 
@@ -14,7 +16,7 @@ class UserAccountPage extends StatefulWidget {
 }
 
 class _UserAccountPageState extends State<UserAccountPage> {
-  initState(){
+  initState() {
     super.initState();
     BlocProvider.of<UserAccountEditBloc>(context).add(LoadUserData());
   }
@@ -30,11 +32,12 @@ class _UserAccountPageState extends State<UserAccountPage> {
                 // TODO: implement listener
               },
               builder: (context, state) {
-                if(state is LoadingUserAccountEdit){
-                  return Center(child: Text("loading"),);
-                }
-                else if(state is LoadedUserAccountEdit)
-                { return Row(
+                if (state is LoadingUserAccountEdit) {
+                  return Center(
+                    child: Text("loading"),
+                  );
+                } else if (state is LoadedUserAccountEdit) {
+                  return Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -42,14 +45,17 @@ class _UserAccountPageState extends State<UserAccountPage> {
                         height: MediaQuery.of(context).size.height * 0.1,
                         width: MediaQuery.of(context).size.height * 0.1,
                         decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.all(Radius.circular(50)),
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  ((state.userdata[0]['profile_image'])!= null || (state.userdata[0]['profile_image'])!= '') ? state.userdata[0]['profile_image']: 'https://htmlcolorcodes.com/assets/images/colors/steel-gray-color-solid-background-1920x1080.png'
-                                ),
-                              fit: BoxFit.fill,
-                            ),
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          image: DecorationImage(
+                            image: NetworkImage(((state.userdata[0]
+                                            ['profile_image']) !=
+                                        null ||
+                                    (state.userdata[0]['profile_image']) != '')
+                                ? state.userdata[0]['profile_image']
+                                : 'https://htmlcolorcodes.com/assets/images/colors/steel-gray-color-solid-background-1920x1080.png'),
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                       SizedBox(width: MediaQuery.of(context).size.width * 0.03),
@@ -193,6 +199,7 @@ class _UserAccountPageState extends State<UserAccountPage> {
               ),
               onPressed: () {
                 //BlocProvider for logging out
+                BlocProvider.of<AuthBloc>(context).add(SignOutEvent());
                 Navigator.pop(context);
                 Navigator.push(
                     context,

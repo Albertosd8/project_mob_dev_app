@@ -28,14 +28,17 @@ class UserAuthRepository {
     print(">> User email:${googleUser.email}");
     print(">> User name:${googleUser.displayName}");
     print(">> User photo:${googleUser.photoUrl}");
+    //print(">> User photo:${googleUser.uid}");
 
     // credenciales de usuario autenticado con Google
     final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
+    print('------------------------------------------------------1');
     // firebase sign in con credenciales de Google
     final authResult = await _auth.signInWithCredential(credential);
+    print('------------------------------------------------------2');
 
     // Extraer token**
     // User user = authResult.user!;
@@ -45,12 +48,14 @@ class UserAuthRepository {
     // crear tabla user en firebase cloudFirestore y agregar valor fotoListId []
     await _createUserCollectionFirebase(_auth.currentUser!.uid,
         googleUser.email, googleUser.displayName, googleUser.photoUrl);
+    print('------------------------------------------------------3');
   }
 
   Future<void> _createUserCollectionFirebase(
       String uid, String email, String? img, String? nombre) async {
     var userDoc =
         await FirebaseFirestore.instance.collection("users").doc(uid).get();
+    print('------------------------------------------------------2.5');
     // Si no exite el doc, lo crea con valor default lista vacia
     if (!userDoc.exists) {
       await FirebaseFirestore.instance.collection("users").doc(uid).set(
@@ -61,6 +66,7 @@ class UserAuthRepository {
           "nombre": nombre,
         },
       );
+      print('------------------------------------------------------3.5');
     } else {
       // Si ya existe el doc return
       return;

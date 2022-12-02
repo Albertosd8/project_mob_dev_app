@@ -5,6 +5,7 @@ import 'package:project_app_eateso/blocs/search_bloc/search_bloc.dart';
 import 'package:project_app_eateso/blocs/user_account_bloc/user_account_bloc.dart';
 import 'package:project_app_eateso/home/home_page.dart';
 import 'package:project_app_eateso/home/home_options.dart';
+import 'package:project_app_eateso/pages/principal_menu.dart';
 import 'package:project_app_eateso/pages/sign_in.dart';
 import 'package:project_app_eateso/pages/sign_up.dart';
 import 'package:project_app_eateso/blocs/restaurant_bloc/restaurant_bloc.dart';
@@ -22,28 +23,41 @@ void main() async {
       create: (context) => AuthBloc()..add(VerifyAuthEvent()),
     ),
     BlocProvider(
-      create: (context) => DataRestaurantBloc(), 
+      create: (context) => DataRestaurantBloc(),
     ),
     BlocProvider(
-      create: (context) => SearchDataBloc(), 
+      create: (context) => SearchDataBloc(),
     ),
     BlocProvider(
       create: (context) => UserAccountEditBloc(),
     ),
-    BlocProvider(
-      create: (context) => FilterSearchDataBloc()
-    ),
+    BlocProvider(create: (context) => FilterSearchDataBloc()),
   ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  //onst MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Material App',
-        home: HomePage(),
-    );
+        home: BlocConsumer<AuthBloc, AuthState>(builder: ((context, state) {
+          print(state);
+          if (state is AuthSuccessState) {
+            print(
+                "-----------------------------------------------Error antes de Auth");
+            return principalMenu();
+          } else if (state is UnAuthState ||
+              state is AuthErrorState ||
+              state is SignOutSuccessState) {
+            return HomePage();
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }), listener: (context, state) {
+          const SnackBar(content: Text("Favor de autenticarse"));
+        }));
   }
 }

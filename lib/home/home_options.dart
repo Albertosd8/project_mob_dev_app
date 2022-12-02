@@ -117,7 +117,11 @@ class _HomePageOptionsState extends State<HomePageOptions> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp(),));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUp(),
+                        ));
                   },
                 ),
                 SizedBox(
@@ -132,7 +136,11 @@ class _HomePageOptionsState extends State<HomePageOptions> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn(),));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignIn(),
+                        ));
                   },
                   child: const Text('Already have an account?'),
                 ),

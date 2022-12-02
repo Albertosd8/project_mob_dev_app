@@ -152,6 +152,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_shimmer",
+      "rootUri": "file:///C:/Flutter/.pub-cache/hosted/pub.dartlang.org/flutter_shimmer-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///C:/Flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -338,7 +344,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-12-01T19:26:06.316094Z",
+  "generated": "2022-12-02T02:39:36.293752Z",
   "generator": "pub",
   "generatorVersion": "2.18.5"
 }

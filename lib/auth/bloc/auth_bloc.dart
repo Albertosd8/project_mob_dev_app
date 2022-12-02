@@ -9,18 +9,17 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  UserAuthRepository _authRepo = UserAuthRepository();
+  UserAuthRepository _authRepository = UserAuthRepository();
 
   AuthBloc() : super(AuthInitial()) {
     on<VerifyAuthEvent>(_authVerfication);
-    on<AnonymousAuthEvent>(_authAnonymous);
     on<GoogleAuthEvent>(_authUser);
     on<SignOutEvent>(_signOut);
   }
 
   FutureOr<void> _authVerfication(event, emit) {
     // inicializar datos de la app
-    if (_authRepo.isAlreadyAuthenticated()) {
+    if (_authRepository.isAlreadyAuthenticated()) {
       emit(AuthSuccessState());
     } else {
       emit(UnAuthState());
@@ -29,10 +28,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _signOut(event, emit) async {
     if (FirebaseAuth.instance.currentUser!.isAnonymous) {
-      await _authRepo.signOutFirebaseUser();
+      await _authRepository.signOutFirebaseUser();
     } else {
-      await _authRepo.signOutGoogleUser();
-      await _authRepo.signOutFirebaseUser();
+      await _authRepository.signOutGoogleUser();
+      await _authRepository.signOutFirebaseUser();
     }
     emit(SignOutSuccessState());
   }
@@ -40,16 +39,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _authUser(event, emit) async {
     emit(AuthAwaitingState());
     try {
-      await _authRepo.signInWithGoogle();
-      print("Error antes de Auth");
+      await _authRepository.signInWithGoogle();
       emit(AuthSuccessState());
     } catch (e) {
-      print("Error al autenticar: $e");
+      print(
+          "------------------------------------------------Error al autenticar: $e");
       emit(AuthErrorState());
     }
-  }
-
-  FutureOr<void> _authAnonymous(event, emit) {
-    // TODO:
   }
 }
